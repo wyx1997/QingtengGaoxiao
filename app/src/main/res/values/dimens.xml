@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="city_divider">1dp</dimen>
+    <dimen name="progress_height">2dp</dimen>
+    <dimen name="toolbar_size">50dp</dimen>
+    <dimen name="main_rv_totop_view_width">25dp</dimen>
+    <dimen name="main_rv_totop_view_height">17dp</dimen>
+    <dimen name="main_rv_totop_view_secondheight">3dp</dimen>
+    <dimen name="jump_height">25dp</dimen>
+    <dimen name="point_spacing">25dp</dimen>
+    <dimen name="point_radius">4dp</dimen>
+</resources>
