@@ -86,7 +86,9 @@ public class QqgpActivity extends BaseActivity {
 
     @Override
     public void showData(Object data) {
-        adapter.setNewData((List<List<String>>) data);
+        if(null != adapter){
+            adapter.setNewData((List<List<String>>) data);
+        }
     }
 
     private class QqgpAdapter extends BaseQuickAdapter<List<String>, BaseViewHolder>{

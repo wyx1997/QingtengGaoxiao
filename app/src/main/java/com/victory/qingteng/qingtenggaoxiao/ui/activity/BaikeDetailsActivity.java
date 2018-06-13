@@ -77,9 +77,11 @@ public class BaikeDetailsActivity extends BaseActivity {
 
     @Override
     public void showData(Object data) {
-        List<List<String>> lists = (List<List<String>>) data;
-        actionBar.setTitle(name);
-        recyclerView.setAdapter(new BaikeRVAdapter(this, lists));
+        if(!isFinishing()){
+            List<List<String>> lists = (List<List<String>>) data;
+            actionBar.setTitle(name);
+            recyclerView.setAdapter(new BaikeRVAdapter(this, lists));
+        }
     }
 
     private class BaikeRVAdapter extends BaseQuickAdapter<List<String>, BaseViewHolder>{

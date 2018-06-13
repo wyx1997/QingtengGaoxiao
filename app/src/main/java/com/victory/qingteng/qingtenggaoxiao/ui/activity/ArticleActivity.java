@@ -57,8 +57,8 @@ public class ArticleActivity extends BaseActivity {
     protected void init() {
         initToolbar(toolbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.talk_item_bg_grey));
-            toolbar.setBackgroundColor(getResources().getColor(R.color.talk_item_bg_grey));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.dividerColor));
+            toolbar.setBackgroundColor(getResources().getColor(android.R.color.white));
         }
         articlePresenter.getData(id);
     }
@@ -78,6 +78,8 @@ public class ArticleActivity extends BaseActivity {
 
     @Override
     public void showData(Object data) {
-        textView.setText((CharSequence) data);
+        if(null != textView){
+            textView.setText((CharSequence) data);
+        }
     }
 }

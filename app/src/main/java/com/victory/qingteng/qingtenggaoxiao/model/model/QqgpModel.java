@@ -33,7 +33,7 @@ public class QqgpModel extends BaseModel implements Contracts.IModel<List<List<S
     @Override
     public void getFromNetwork(String id, final Contracts.ICallback<List<List<String>>> callback) {
         if(type == SCHOOL){
-            getApi().getExamQqgp(id)
+            getApi().getSchoolQqgp(id)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new BaseNetworkObserver(callback));

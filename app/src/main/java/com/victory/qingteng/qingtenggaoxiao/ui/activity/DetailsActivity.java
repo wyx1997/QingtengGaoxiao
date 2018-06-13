@@ -117,6 +117,12 @@ public class DetailsActivity extends BaseActivity implements Toolbar.OnMenuItemC
         toolbar.setOnMenuItemClickListener(this);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        unRegisterEventBus(this);
+    }
+
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void getList(StringListMessage message){
         if(null == detailsPresenter){

@@ -158,6 +158,12 @@ public class MainActivity extends BaseActivity {
         navigationBar.setTabSelectedListener(onTabSelectedListener);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        removeAllEvent();
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void addArrayFragment(ArrayFragmentMessage message){
         arrayFragment = ArrayFragment.getInstance();

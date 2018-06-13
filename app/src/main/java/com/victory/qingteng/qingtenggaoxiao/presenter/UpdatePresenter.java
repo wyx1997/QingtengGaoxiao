@@ -35,19 +35,18 @@ public class UpdatePresenter extends BasePresenter {
                     view.hideLoading();
                     PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
                     if(info.versionCode >= Integer.valueOf(data.get(0))){
-                        ToastUtils.showToast(context.getResources().getString(R.string.no_update_version));
+                        onError(context.getResources().getString(R.string.no_update_version));
                     } else {
                         view.showData(data);
                     }
                 } catch (PackageManager.NameNotFoundException e) {
-                    ToastUtils.showToast(context.getResources().getString(R.string.update_failure));
-                    e.printStackTrace();
+                    onError(context.getResources().getString(R.string.update_failure));
                 }
             }
 
             @Override
             public void onError(String errorMsg) {
-
+                view.showError(errorMsg);
             }
 
             @Override

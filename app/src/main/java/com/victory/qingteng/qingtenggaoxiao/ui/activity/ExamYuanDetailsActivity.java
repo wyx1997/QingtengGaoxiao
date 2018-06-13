@@ -79,10 +79,12 @@ public class ExamYuanDetailsActivity extends BaseActivity {
 
     @Override
     public void showData(Object data) {
-        List<String> list = (List<String>) data;
-        actionBar.setTitle(list.get(0));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RvAdapter(list.subList(1, list.size())));
+        if(!isFinishing()){
+            List<String> list = (List<String>) data;
+            actionBar.setTitle(list.get(0));
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(new RvAdapter(list.subList(1, list.size())));
+        }
     }
 
     private class RvAdapter extends BaseQuickAdapter<String, BaseViewHolder>{

@@ -2,6 +2,7 @@ package com.victory.qingteng.qingtenggaoxiao.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -36,31 +37,23 @@ public class DetailsRVAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
     private Context context;
 
-    private List<String> originData;
-
-    private int[] originPos;
-
-    private int noDataLen = 0;
+    private List<Integer> originPos;
 
     private int type;
 
     private String detailsTitle;
 
-    public DetailsRVAdapter(Context context, @Nullable List<String> data, String title, int type) {
+    public DetailsRVAdapter(Context context, @Nullable List<String> data, String title, int type, List<Integer> originPos) {
         super(R.layout.item_details, data);
         this.context = context;
-        originData = data;
-        originPos = new int[type == DBHelper.TYPE_SCHOOL ? schoolItems.length : majorItems.length];
-        for(int i=0; i<originPos.length; ++i){
-            originPos[i] = i;
-        }
         detailsTitle = title;
         this.type = type;
+        this.originPos = originPos;
     }
 
     @Override
     protected void convert(final BaseViewHolder helper, final String item) {//每一个item对应一个helper
-        final int position = originPos[helper.getAdapterPosition()];
+        final int position = originPos.get(helper.getAdapterPosition());
         helper.setText(R.id.details_text, type == DBHelper.TYPE_SCHOOL ? schoolItems[position] : majorItems[position])
                 .setImageResource(R.id.details_image, type == DBHelper.TYPE_SCHOOL ? schoolImgs[position] : majorImgs[position]);
         helper.itemView.setOnClickListener(new View.OnClickListener() {
@@ -75,26 +68,5 @@ public class DetailsRVAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
                 }
             }
         });
-    }
-
-    @Override
-    public int getItemCount() {
-        int size = super.getItemCount();
-        for(int i=0; i<originData.size(); ++i){
-            if(originData.get(i) == null || originData.get(i).equals("")){
-                size -= 1;
-                ++noDataLen;
-                originData.remove(i);
-            }
-            originPos[i] += noDataLen;
-        }
-        noDataLen = 0;
-        return size;
-    }
-
-    @Nullable
-    @Override
-    public String getItem(int position) {
-        return originData.get(position);
     }
 }

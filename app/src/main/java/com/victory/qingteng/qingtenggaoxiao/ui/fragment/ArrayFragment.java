@@ -104,6 +104,7 @@ public class ArrayFragment extends BaseFragment implements BaseQuickAdapter.OnIt
             case Constants.CITY_SCHOOL:
             case Constants.MAJOR:
                 int type1 = type == Constants.CITY_SCHOOL ? DBHelper.TYPE_SCHOOL : DBHelper.TYPE_MAJOR;
+                DetailsActivity.open(fatherActivity, type1);
                 DBHelper.getInstance()
                         .queryValueByArgs(type1,null, "name=?", new String[]{(String) adapter.getItem(position)})
                         .subscribe(new Consumer<List<String>>() {
@@ -114,7 +115,6 @@ public class ArrayFragment extends BaseFragment implements BaseQuickAdapter.OnIt
                                 }
                             }
                         });
-                DetailsActivity.open(fatherActivity, type1);
                 break;
             case Constants.TIANBAO_ENTRY:
                 ExamYuanDetailsActivity.open(fatherActivity, position);

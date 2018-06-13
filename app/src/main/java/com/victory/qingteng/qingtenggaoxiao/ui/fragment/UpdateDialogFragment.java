@@ -28,6 +28,7 @@ import com.victory.qingteng.qingtenggaoxiao.presenter.UpdatePresenter;
 import com.victory.qingteng.qingtenggaoxiao.utils.SharedPfUtils;
 import com.victory.qingteng.qingtenggaoxiao.utils.ToastUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,8 +38,9 @@ import util.UpdateAppUtils;
 
 public class UpdateDialogFragment extends DialogFragment implements View.OnClickListener, Contracts.IView<List<String>>{
 
-    public static final String apkName = "青藤高校";
+    private static final String apkName = "青藤高校";
     private static final String DOWNLOAD_ID = "downloadId";
+    private static final String DATA = "data";
 
     @BindView(R.id.update_details)
     TextView updateDetails;
@@ -92,6 +94,7 @@ public class UpdateDialogFragment extends DialogFragment implements View.OnClick
     }
 
     private void initView(){
+        agreeBtn.setEnabled(false);
         agreeBtn.setOnClickListener(this);
         refuseBtn.setOnClickListener(this);
     }
@@ -135,9 +138,12 @@ public class UpdateDialogFragment extends DialogFragment implements View.OnClick
 
     @Override
     public void showData(List<String> data) {
-        updateDetails.setText(data.get(1));
-        url = data.get(2);
-        versionCode = Integer.valueOf(data.get(0));
+        if(!isDetached()){
+            updateDetails.setText(data.get(1));
+            url = data.get(2);
+            versionCode = Integer.valueOf(data.get(0));
+            agreeBtn.setEnabled(true);
+        }
     }
 
     @Override
